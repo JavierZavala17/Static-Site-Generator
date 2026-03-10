@@ -1,7 +1,16 @@
-from email.mime import image
+import re
 
 from textnode import TextNode, TextType
-import re
+
+
+def text_to_textnodes(text):
+    nodes = [TextNode(text, TextType.TEXT)]
+    nodes = split_nodes_delimiter(nodes, "`",  TextType.CODE)
+    nodes = split_nodes_delimiter(nodes, "**", TextType.BOLD)
+    nodes = split_nodes_delimiter(nodes, "_",  TextType.ITALIC)
+    nodes = split_nodes_image(nodes)
+    nodes = split_nodes_link(nodes)
+    return nodes
 
 
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
@@ -26,15 +35,6 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
         new_nodes.extend(split_nodes)
     return new_nodes
 
-
-def extract_markdown_images(text):
-    images = re. findall(r"\!\[(.*?)\]\((.*?)\)", text)
-    return images
-
-
-def extract_markdown_links(text):
-    links = re.findall(r"(?<!\!)\[(.*?)\]\((.*?)\)", text)
-    return links
 
 def split_nodes_image(old_nodes):
     new_nodes = []
@@ -92,3 +92,13 @@ def split_nodes_link(old_nodes):
         if original_text != "":
             new_nodes.append(TextNode(original_text, TextType.TEXT))
     return new_nodes
+
+
+def extract_markdown_images(text):
+    images = re.findall(r"\!\[(.*?)\]\((.*?)\)", text)
+    return images
+
+
+def extract_markdown_links(text):
+    links = re.findall(r"(?<!\!)\[(.*?)\]\((.*?)\)", text)
+    return links
