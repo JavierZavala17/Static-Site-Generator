@@ -138,6 +138,7 @@ def ulist_to_html_node(block):
         list_items.append(ParentNode("li", children))
     return ParentNode("ul", list_items)
 
+
 def quote_to_html_node(block):
     lines = block.split("\n")
     cleaned_lines = []
