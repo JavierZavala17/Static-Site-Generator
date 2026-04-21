@@ -26,5 +26,29 @@ def main():
         os.path.join(dir_path_public, "index.html"),
     )
 
+    generate_page(
+        os.path.join(dir_path_content, "blog/glorfindel/index.md"),
+        template_path,
+        os.path.join(dir_path_public, "blog/glorfindel/index.html")
+    )
+
+    generate_page(
+        os.path.join(dir_path_content, "blog/tom/index.md"),
+        template_path,
+        os.path.join(dir_path_public, "blog/tom/index.html")
+    )
+
+    generate_page(
+        os.path.join(dir_path_content, "blog/majesty/index.md"),
+        template_path,
+        os.path.join(dir_path_public, "blog/majesty/index.html")
+    )
+    
+    generate_page(
+        os.path.join(dir_path_content, "contact/index.md"),
+        template_path,
+        os.path.join(dir_path_public, "contact/index.html")
+    )
+
 
 main()
